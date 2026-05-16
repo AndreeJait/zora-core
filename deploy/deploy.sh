@@ -65,7 +65,18 @@ wait_for_container "$CONTAINER"
 
 # ── Run migrations ────────────────────────────────────────────────────────────
 echo "[deploy] Running migrations..."
-docker compose -f "$COMPOSE_FILE" exec "$CONTAINER" /app/migrate up
+retry=0
+max_retries=5
+until docker compose -f "$COMPOSE_FILE" exec "$CONTAINER" /app/migrate up 2>&1; do
+  retry=$((retry + 1))
+  if [ $retry -ge $max_retries ]; then
+    echo "[deploy] ERROR: migration failed after ${max_retries} attempts."
+    exit 1
+  fi
+  delay=$((retry * 3))
+  echo "[deploy] migration attempt ${retry}/${max_retries} failed, retrying in ${delay}s..."
+  sleep $delay
+done
 
 # ── Cleanup ───────────────────────────────────────────────────────────────────
 echo "[deploy] Cleaning up old images..."
