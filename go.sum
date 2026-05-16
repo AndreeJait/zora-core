@@ -1,8 +1,8 @@
 filippo.io/edwards25519 v1.1.0/go.mod h1:BxyFTGdWcka3PhytdK4V28tE5sGfRvvvRV7EaN4VDT4=
 filippo.io/edwards25519 v1.1.1 h1:YpjwWWlNmGIDyXOn8zLzqiD+9TyIlPhGFG96P39uBpw=
 filippo.io/edwards25519 v1.1.1/go.mod h1:BxyFTGdWcka3PhytdK4V28tE5sGfRvvvRV7EaN4VDT4=
-github.com/AndreeJait/go-utility/v2 v2.0.0-20260507142520-3c23db7b5327 h1:tYQz5wQnmumrTCIdVAIHv/j8n639RBh7OMzbul1lVL8=
-github.com/AndreeJait/go-utility/v2 v2.0.0-20260507142520-3c23db7b5327/go.mod h1:zsSiW8254GB+GgZIS5k64Tolzd/oUpK63F0KSEPjO+Q=
+github.com/AndreeJait/go-utility/v2 v2.0.0-20260516180154-77b61b2c5388 h1:oF/E6bh3fqvjD/Lhr5eg2GTzQIYbU2Hdbm9yLRY+rwk=
+github.com/AndreeJait/go-utility/v2 v2.0.0-20260516180154-77b61b2c5388/go.mod h1:zsSiW8254GB+GgZIS5k64Tolzd/oUpK63F0KSEPjO+Q=
 github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161 h1:L/gRVlceqvL25UVaW/CKtUDjefjrs0SPonmDGUVOYP0=
 github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161/go.mod h1:xomTg63KZ2rFqZQzSB4Vz2SUXa1BpHTVz9L5PTmPC4E=
 github.com/KyleBanks/depth v1.2.1 h1:5h8fQADFrWtarTdtDudMmGsC7GPbOAu6RVB3ffsVFHc=

@@ -3,7 +3,7 @@ module github.com/AndreeJait/zora-core
 go 1.26.0
 
 require (
-	github.com/AndreeJait/go-utility/v2 v2.0.0-20260507142520-3c23db7b5327
+	github.com/AndreeJait/go-utility/v2 v2.0.0-20260516180154-77b61b2c5388
 	github.com/gin-gonic/gin v1.12.0
 	github.com/golang-migrate/migrate/v4 v4.19.1
 	github.com/google/uuid v1.6.0
