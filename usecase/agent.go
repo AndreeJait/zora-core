@@ -142,7 +142,7 @@ func (uc *agentUseCase) Resume(ctx context.Context, threadID string, resumeValue
 }
 
 func (uc *agentUseCase) buildGraph() (graphw.Graph[entity.ZoraState], error) {
-	deps := graph.NewAgentDeps(uc.cfg, uc.llm, uc.embedder, uc.toolReg, uc.knowledge, uc.tagExtractor, uc.wahaClient, uc.planStore, uc.messageStore)
+	deps := graph.NewAgentDeps(uc.cfg, uc.llm, uc.embedder, uc.toolReg, uc.knowledge, uc.tagExtractor, uc.checkpointer, uc.wahaClient, uc.planStore, uc.messageStore)
 	return graph.BuildAgentGraph(deps)
 }
 

@@ -23,6 +23,7 @@ type AgentDeps struct {
 	ToolRegistry          outbound.ToolRegistryClient
 	Knowledge             outbound.KnowledgeClient
 	TagExtractor          outbound.TagExtractor
+	Checkpointer          graphw.Checkpointer
 	ToolLimit             int
 	DocsLimit             int
 	ToolMinScore          float64
@@ -44,6 +45,7 @@ func NewAgentDeps(
 	toolReg outbound.ToolRegistryClient,
 	knowledge outbound.KnowledgeClient,
 	tagExtractor outbound.TagExtractor,
+	checkpointer graphw.Checkpointer,
 	wahaClient outbound.WahaClient,
 	planStore outbound.PlanStore,
 	messageStore outbound.MessageStore,
@@ -54,6 +56,7 @@ func NewAgentDeps(
 		ToolRegistry:          toolReg,
 		Knowledge:             knowledge,
 		TagExtractor:          tagExtractor,
+		Checkpointer:          checkpointer,
 		ToolLimit:             cfg.Agent.ToolLimit,
 		DocsLimit:             cfg.Agent.KnowledgeLimit,
 		ToolMinScore:          cfg.Agent.ToolMinScore,

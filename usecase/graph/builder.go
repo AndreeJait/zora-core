@@ -58,6 +58,7 @@ func BuildAgentGraph(deps AgentDeps) (graphw.Graph[entity.ZoraState], error) {
 	)
 
 	graph, err := builder.Compile(
+		graphw.WithCheckpointer(deps.Checkpointer),
 		graphw.WithRecursionLimit(deps.ToolLimit*2+10),
 	)
 	if err != nil {
