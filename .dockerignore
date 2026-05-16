@@ -1,0 +1,8 @@
+bin/
+#docs/
+vendor/
+.claude/
+.git/
+*.md
+.gitignore
+CLAUDE.md

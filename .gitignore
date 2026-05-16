@@ -1,0 +1,32 @@
+# Local config overrides
+files/config/app.local.yaml
+
+# Built binary
+bin/
+build/
+vendor/
+
+# Generated Swagger docs
+docs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Go
+*.exe
+*.exe~
+*.test
+*.out
+*.prof
+
+# Claude Code
+.claude/
+CLAUDE.md

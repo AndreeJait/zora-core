@@ -1,0 +1,12 @@
+# Local config overrides — copy this file to app.local.yaml and customize.
+# Values here override app.yaml. Environment variables override both.
+#
+# Example:
+# app:
+#   http_port: 9090
+# http:
+#   debug_mode: false
+# db:
+#   dsn: "postgres://user:pass@localhost:5432/mydb?sslmode=disable"
+# redis:
+#   address: "localhost:6379"

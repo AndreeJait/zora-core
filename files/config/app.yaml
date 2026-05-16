@@ -1,0 +1,92 @@
+app:
+  name: zora-core
+  env: development
+  http_port: 8080
+
+http:
+  engine: echo
+  enable_swagger: true
+  debug_mode: true
+  api_key: ""  # Set to protect management endpoints; empty = no auth
+
+log:
+  level: debug
+  format: JSON
+  write_to_file: false
+  file_path: ""
+
+db:
+  driver: gorm
+  dialect: postgres
+  dsn: "postgres://zora:zora@localhost:5432/zora?sslmode=disable"
+  max_open_conns: 25
+  max_idle_conns: 5
+  conn_max_lifetime: 5m
+  debug_mode: false
+
+redis:
+  address: "localhost:6379"
+  password: ""
+  db: 0
+  pool_size: 10
+  debug_mode: false
+
+agent:
+  max_steps: 25
+  tool_limit: 15
+  knowledge_limit: 5
+  tool_min_score: 0.3
+  knowledge_min_score: 0.4
+  max_tool_context_tokens: 4000
+  max_knowledge_context_tokens: 2000
+  tools_enabled: true
+  knowledge_enabled: false
+
+llm:
+  provider: ollama
+  model: "qwen3:14b"
+  embed_model: "nomic-embed-text:latest"
+  base_url: "http://localhost:11434/v1"
+  embed_base_url: ""  # Defaults to base_url without /v1 suffix; set to override
+  api_key: "ollama"
+  temperature: 0.7
+  max_tokens: 4096
+
+minio:
+  endpoint: "localhost:9000"
+  access_key: "minioadmin"
+  secret_key: "minioadmin"
+  use_ssl: false
+  region: "us-east-1"
+
+knowledge:
+  base_url: "http://localhost:8001"
+
+mcp_server:
+  base_url: "http://localhost:8081"
+  api_key: ""  # API key for zora-mcp-server; must match the server's http.api_key
+
+waha:
+  base_url: "http://localhost:3000"
+  api_key: ""
+  session: "default"
+  admin_chat_id: ""  # WAHA chat ID for admin failure notifications
+
+task:
+  worker_count: 5
+  channel_size: 1000
+  worker_timeout: 5m
+  default_max_retry: 3
+  default_retry_delay: 30s
+
+message_store:
+  ttl: 24h
+
+nsq:
+  nsqd_addr: "127.0.0.1:4150"
+  lookupd_addrs:
+    - "127.0.0.1:4161"
+  channel: "zora-worker"
+
+graceful:
+  shutdown_timeout: 10s
