@@ -72,4 +72,4 @@ jobs:
             ProxyCommand cloudflared access ssh --hostname %h
           EOF
 
-          ssh "$SSH_HOST" "cd /home/andree/docker/zora-core && bash deploy.sh"
+          ssh "$SSH_HOST" "cd /home/andree/docker/zora-core/deploy && bash deploy.sh"
