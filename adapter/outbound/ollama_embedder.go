@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/AndreeJait/zora-core/port/outbound"
@@ -36,6 +37,16 @@ func NewOllamaEmbedder(cfg OllamaEmbedderConfig) *OllamaEmbedder {
 	}
 }
 
+// resolveBaseURL returns the Ollama API base URL for the given model.
+// Cloud models (containing "-cloud") use the Ollama cloud endpoint with API key auth.
+// Local models use the configured base URL.
+func (o *OllamaEmbedder) resolveBaseURL(model string) string {
+	if strings.Contains(model, "-cloud") {
+		return "https://ollama.com"
+	}
+	return o.baseURL
+}
+
 type ollamaEmbedRequest struct {
 	Model  string   `json:"model"`
 	Input  []string `json:"input"`
@@ -56,7 +67,7 @@ func (o *OllamaEmbedder) Embed(ctx context.Context, texts []string) ([][]float64
 		return nil, fmt.Errorf("marshal: %w", err)
 	}
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, o.baseURL+"/api/embed", bytes.NewReader(bodyBytes))
+	req, err := http.NewRequestWithContext(ctx, http.MethodPost, o.resolveBaseURL(o.model)+"/api/embed", bytes.NewReader(bodyBytes))
 	if err != nil {
 		return nil, fmt.Errorf("new request: %w", err)
 	}

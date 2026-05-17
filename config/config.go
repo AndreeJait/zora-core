@@ -24,6 +24,7 @@ type AppConfig struct {
 		EnableSwagger bool   `mapstructure:"enable_swagger"`
 		DebugMode     bool   `mapstructure:"debug_mode"`
 		APIKey        string `mapstructure:"api_key"`
+		SwaggerHost   string `mapstructure:"swagger_host"`
 	} `mapstructure:"http"`
 
 	Log struct {
@@ -203,6 +204,7 @@ func mergeNonZero(dst, src *AppConfig) {
 	dst.Whitelist.DefaultTokensPerHour = valuew.Coalesce(src.Whitelist.DefaultTokensPerHour, dst.Whitelist.DefaultTokensPerHour)
 	dst.Graceful.ShutdownTimeout = valuew.Coalesce(src.Graceful.ShutdownTimeout, dst.Graceful.ShutdownTimeout)
 	dst.HTTP.APIKey = valuew.Coalesce(src.HTTP.APIKey, dst.HTTP.APIKey)
+	dst.HTTP.SwaggerHost = valuew.Coalesce(src.HTTP.SwaggerHost, dst.HTTP.SwaggerHost)
 	dst.WAHA.AdminChatID = valuew.Coalesce(src.WAHA.AdminChatID, dst.WAHA.AdminChatID)
 	dst.Task.WorkerCount = valuew.Coalesce(src.Task.WorkerCount, dst.Task.WorkerCount)
 	dst.Task.ChannelSize = valuew.Coalesce(src.Task.ChannelSize, dst.Task.ChannelSize)

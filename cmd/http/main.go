@@ -40,8 +40,12 @@ func main() {
 		cfg.HTTP.Engine = *engineFlag
 	}
 
-	// Override swagger host from config port
-	docs.SwaggerInfo.Host = fmt.Sprintf("localhost:%d", cfg.App.HTTPPort)
+	// Override swagger host from config, fallback to localhost
+	if cfg.HTTP.SwaggerHost != "" {
+		docs.SwaggerInfo.Host = cfg.HTTP.SwaggerHost
+	} else {
+		docs.SwaggerInfo.Host = fmt.Sprintf("localhost:%d", cfg.App.HTTPPort)
+	}
 
 	// Initialize logger
 	if err := logw.Init(&logw.LogConfig{

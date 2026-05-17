@@ -1,0 +1,59 @@
+services:
+  nsqlookupd:
+    image: nsqio/nsq:v1.3.0
+    container_name: nsqlookupd
+    command: /nsqlookupd
+    ports:
+      - "4161:4161"
+    networks:
+      - proxy
+    restart: unless-stopped
+
+  nsqd:
+    image: nsqio/nsq:v1.3.0
+    container_name: nsqd
+    command: /nsqd
+      --lookupd-tcp-address=nsqlookupd:4160
+      --broadcast-address=nsqd
+      --data-path=/data
+      --msg-timeout=10m
+      --max-msg-timeout=15m
+    depends_on:
+      - nsqlookupd
+    ports:
+      - "4150:4150"
+    volumes:
+      - nsq_data:/data
+    networks:
+      - proxy
+    restart: unless-stopped
+
+  nsqadmin:
+    image: nsqio/nsq:v1.3.0
+    container_name: nsqadmin
+    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+    depends_on:
+      - nsqlookupd
+    expose:
+      - "4171"
+    networks:
+      - proxy
+    restart: unless-stopped
+
+  gateway:
+    image: caddy:2-alpine
+    container_name: caddy_nsq_gateway
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    depends_on:
+      - nsqadmin
+    networks:
+      - proxy
+    restart: unless-stopped
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  nsq_data:

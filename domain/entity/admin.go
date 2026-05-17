@@ -9,10 +9,10 @@ import (
 type AdminEntry struct {
 	ID        string    `json:"id" gorm:"primaryKey;type:uuid;default:gen_random_uuid()"`
 	Phone     string    `json:"phone" gorm:"uniqueIndex;not null"`
-	LID       string    `json:"lid" gorm:"index"`                           // WhatsApp LID for group fallback lookup
+	LID       string    `json:"lid" gorm:"column:lid;index"` // WhatsApp LID for group fallback lookup
 	Name      string    `json:"name" gorm:"not null"`
-	Scope     string    `json:"scope" gorm:"not null;default:'both'"`       // "personal", "group", "both"
-	ChatIDs   string    `json:"chat_ids" gorm:"type:text"`                  // JSON array of group IDs; empty = no restriction
+	Scope     string    `json:"scope" gorm:"not null;default:'both'"` // "personal", "group", "both"
+	ChatIDs   string    `json:"chat_ids" gorm:"type:text"`            // JSON array of group IDs; empty = no restriction
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
 	UpdatedAt time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/AndreeJait/go-utility/v2/brokerw"
@@ -57,9 +58,14 @@ func newRedisClient(conn *outbound.RedisConn) *redis.Client {
 }
 
 // newLLM creates the LLM provider (OpenAI-compatible, pointed at Ollama).
+// Cloud models (containing "-cloud") use the Ollama cloud endpoint instead of the configured base URL.
 func newLLM(cfg *config.AppConfig, cc *CleanupCollector) (llmw.LLM, error) {
+	baseURL := cfg.LLM.BaseURL
+	if strings.Contains(cfg.LLM.Model, "-cloud") {
+		baseURL = "https://ollama.com"
+	}
 	llm, err := openaiw.New(&openaiw.Config{
-		BaseURL: cfg.LLM.BaseURL,
+		BaseURL: baseURL,
 		APIKey:  cfg.LLM.APIKey,
 		Model:   cfg.LLM.Model,
 	})

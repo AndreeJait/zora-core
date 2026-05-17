@@ -8,6 +8,7 @@ http:
   enable_swagger: true
   debug_mode: true
   api_key: ""  # Set to protect management endpoints; empty = no auth
+  swagger_host: ""  # Override Swagger UI host (e.g. "zora-core.kooramaimmanuel.my.id"); empty = localhost:<port>
 
 log:
   level: debug
